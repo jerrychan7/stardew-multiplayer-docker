@@ -5,8 +5,8 @@ for modPath in /data/Stardew/Stardew\ Valley/Mods/*/
 do
   mod=$(basename "$modPath")
 
-  # Normalize mod name ot uppercase and only characters, eg. "Always On Server" => ENABLE_ALWAYSONSERVER_MOD
-  var="ENABLE_$(echo "${mod^^}" | tr -cd '[A-Z]')_MOD"
+  # Normalize mod name ot uppercase and only characters, eg. "Always On Server" => ENABLE_ALWAYS_ON_SERVER_MOD
+  var="ENABLE_$(echo "${mod^^}" | tr ' ' '_' | tr -cd '[A-Z_]')_MOD"
 
   # Remove the mod if it's not enabled
   if [ "${!var}" != "true" ]; then

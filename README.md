@@ -7,7 +7,6 @@ This project aims to autostart a Stardew Valley Multiplayer Server as easy as po
  - Updating to most recent version requires a rebuild: `docker-compose build --no-cache` 
  - Although I'm trying to put out updates, I don't have the time for testing, so I recommend forking and fixing things on your own.
    - You will always get the most recent version with the fork at https://github.com/norimicry/stardew-multiplayer-docker
-     
  - Ansible and Terraform will not be supported anymore
 
 ## Setup
@@ -22,7 +21,7 @@ docker-compose up
 
 ## Game Setup
 
-Intially you have to create or load a game once via VNC or Web interface. After that the Autoload Mod jumps into the previously loaded savegame everytime you restart or rebuild the container. The AutoLoad Mod config file is by default mounted as a volume, since it keeps the state of the ongoing SaveGame, but you can also copy your existing SaveGame to the `Saves` volume and define the SaveGame's name in the environment variables.
+Initially you have to create or load a game once via VNC or Web interface. After that the Autoload Mod jumps into the previously loaded save game every time you restart or rebuild the container. The AutoLoad Mod config file is by default mounted as a volume, since it keeps the state of the ongoing SaveGame, but you can also copy your existing SaveGame to the `Saves` volume and define the SaveGame's name in the environment variables.
 
 ### VNC
 
@@ -38,7 +37,7 @@ Localhost:
      - VNCPASS=insecure
 ```
 
-### Web Interface 
+### Web Interface
 
 On port 5800 inside the container is a web interface. This is a bit easier and more accessible than just the VNC interface. Although you will be asked for the vnc password, I wouldn't recommend exposing the port to the outside world.
 
@@ -46,7 +45,7 @@ On port 5800 inside the container is a web interface. This is a bit easier and m
 
 ## How it works
 
-The game will be pulled from my servers (I'll assume you already own the game - since you're looking for a multiplayer - so please don't rip it from there) and the modloader (SMAPI) will be pulled from Github when building the container. You can control the mods's settings with environment variables in the `docker-compose.yml` file.
+The game will be pulled from my servers (I'll assume you already own the game - since you're looking for a multiplayer - so please don't rip it from there) and the modLoader (SMAPI) will be pulled from Github when building the container. You can control the mods's settings with environment variables in the `docker-compose.yml` file.
 
 ## Used Mods
 
@@ -65,8 +64,8 @@ The error log of the SMAPI Loader can be found inside the container at `/config/
 
 ### VNC
 
-Access the game via VNC to initially load or start a pregenerated savegame. You can control the Server from there or edit the config.json files in the configs folder.
+Access the game via VNC to initially load or start a pregenerated save game. You can control the Server from there or edit the config.json files in the configs folder.
 
 ### Performance
 
-I'd recomend a VPS/Machine with at least four logical CPUs and 4GB Ram, otherwise there will be horrible lags. The minimum configuration I'd consider playable with two to four players would be two logical CPUs and 1GB of Ram.
+I'd recommend a VPS/Machine with at least four logical CPUs and 4GB Ram, otherwise there will be horrible lags. The minimum configuration I'd consider playable with two to four players would be two logical CPUs and 1GB of Ram.
