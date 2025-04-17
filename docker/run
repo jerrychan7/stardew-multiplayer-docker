@@ -1,5 +1,0 @@
-#!/bin/sh
-
-if [ -s "${STARDEW_PATH}/Stardew Valley/Mods/AutoLoadGame/config.json" ] ; then
-  chmod 777 ${STARDEW_PATH}/Stardew\ Valley/Mods/AutoLoadGame/config.json;
-fi
