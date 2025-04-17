@@ -1,3 +1,5 @@
 
 valley_saves
 /.vscode
+
+*.ignore.*
