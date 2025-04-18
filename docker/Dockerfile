@@ -10,20 +10,29 @@ ENV TERM="xterm"
 ENV XDG_DATA_HOME="/config/xdg/data"
 ENV XDG_CONFIG_HOME="/config/xdg/config"
 ENV XDG_CACHE_HOME="/config/xdg/cache"
+ENV DISPLAY_HEIGHT="900"
+ENV DISPLAY_WIDTH="1200"
 
 ENV STARDEW_VERSION="1.6.15"
 ENV SMAPI_VERSION="4.1.10"
 ENV STARDEW_PATH="/data/stardew"
 ENV SMAPI_PATH="/data/smapi"
 
+# 两个smapi内置的mod，布尔值决定是否启用
+ENV ENABLE_CONSOLE_COMMANDS_MOD="false"
+ENV ENABLE_SAVE_BACKUP_MOD="true"
+
 COPY Stardew_${STARDEW_VERSION}.ignore.tar.gz ${STARDEW_PATH}_${STARDEW_VERSION}.tar.gz
 COPY SMAPI-${SMAPI_VERSION}-installer.ignore.zip ${SMAPI_PATH}_${SMAPI_VERSION}.zip
+COPY dotnet-runtime-5.0.17-linux-musl-x64.ignore.tar.gz /data/dotnet.tar.gz
 
 RUN <<-EOF_RUN
 
 ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime
 echo "${TZ}" > /etc/timezone
 cat >> ~/.bashrc << 'EOF'
+alias ll="ls -alF"
+alias la="ls -AF"
 PS1='\n$(E=$?;[[ $E -ne 0 ]]&&echo -e "\e[2mExit status: \e[0;91m$E\n\e[m")\[\e[1;34m\]>\[\e[m\] \[\e[36m\]'`id -nu`'\[\e[m\]@\[\e[32m\]'`echo ${SSH_CONNECTION:-'  localhost'}|cut -d' ' -f3`'\[\e[m\]:\[\e[1;33m\]\w\[\e[m\] [\t]\n\[\e[1;31m\]\$\[\e[m\] '
 EOF
 
@@ -43,6 +52,12 @@ RUN <<-EOF_RUN
 apt-get install -y unzip mono-runtime xterm
 apt-get clean all
 rm -rf /var/lib/apt/lists/*
+EOF_RUN
+
+RUN <<-EOF_RUN
+tar -zxf /data/dotnet.tar.gz -C /usr/share/dotnet
+# rm /data/dotnet.tar.gz
+ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 EOF_RUN
 
 RUN <<-EOF_RUN
@@ -72,12 +87,11 @@ ln -s /data/mods ${STARDEW_PATH}/Stardew\ Valley/Mods
 echo "Setting permissions..."
 chmod +x ${STARDEW_PATH}/Stardew\ Valley/StardewValley
 chmod -R 777 ${STARDEW_PATH}/
-chown -R 1000:1000 ${STARDEW_PATH}
+chown -R 1000:1000 ${STARDEW_PATH}/
 chmod +x /opt/*.sh
+chmod -R 777 /config/
+chown -R 1000:1000 /config/
 EOF_RUN
-
-COPY run /etc/services.d/utils/run
-RUN chmod +x /etc/services.d/utils/run
 
 # CMD ["/bin/bash", "-l"]
 

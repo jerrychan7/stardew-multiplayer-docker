@@ -1,13 +1,11 @@
-version: '2.2'
 
 services:
   valley:
     build: docker
     container_name: stardew
+    image: stardew-multiplayer:debian-11-v3.5.8
     environment:
-      - "VNC_PASSWORD=nyanyanya"
-      - "DISPLAY_HEIGHT=900"
-      - "DISPLAY_WIDTH=1200"
+      - "VNC_PASSWORD=prprpr"
     ports:
       # VNC
       - 5902:5900

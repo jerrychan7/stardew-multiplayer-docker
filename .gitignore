@@ -3,3 +3,5 @@ valley_saves
 /.vscode
 
 *.ignore.*
+
+/docker/mods/SMAPI_BUILD_IN

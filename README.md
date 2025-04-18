@@ -16,7 +16,7 @@ This project aims to autostart a Stardew Valley Multiplayer Server as easy as po
 ```
 git clone https://github.com/printfuck/stardew-multiplayer-docker
 
-docker-compose up
+docker compose up
 ```
 
 ## Game Setup
