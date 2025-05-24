@@ -25,6 +25,7 @@ ENV ENABLE_SAVE_BACKUP_MOD="true"
 COPY Stardew_${STARDEW_VERSION}.ignore.tar.gz ${STARDEW_PATH}_${STARDEW_VERSION}.tar.gz
 COPY SMAPI-${SMAPI_VERSION}-installer.ignore.zip ${SMAPI_PATH}_${SMAPI_VERSION}.zip
 COPY dotnet-runtime-5.0.17-linux-musl-x64.ignore.tar.gz /data/dotnet.tar.gz
+COPY libstrangle.ignore.zip /data/libstrangle.zip
 
 RUN <<-EOF_RUN
 
@@ -49,11 +50,28 @@ EOF_RUN
 
 RUN <<-EOF_RUN
 # apt-get install -y wget
-apt-get install -y unzip mono-runtime xterm
+apt-get install -y unzip mono-runtime xterm procps
+
+# Install libstrangle: https://github.com/printfuck/stardew-multiplayer-docker/issues/44
+# apt-get install -y git
+apt-get install -y make gcc-multilib g++-multilib libx11-dev mesa-common-dev libc6-dev-i386
+
 apt-get clean all
 rm -rf /var/lib/apt/lists/*
 EOF_RUN
 
+# Install libstrangle: https://github.com/printfuck/stardew-multiplayer-docker/issues/44
+RUN <<-EOF_RUN
+mkdir -p /data/libstrangle
+cd /data
+# RUN git clone https://gitlab.com/torkel104/libstrangle.git
+unzip -qd /data/libstrangle /data/libstrangle.zip
+cd libstrangle
+
+make && make install
+EOF_RUN
+
+# Install dotnet
 RUN <<-EOF_RUN
 tar -zxf /data/dotnet.tar.gz -C /usr/share/dotnet
 # rm /data/dotnet.tar.gz

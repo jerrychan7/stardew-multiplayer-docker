@@ -20,4 +20,7 @@ if [ ! -d "/data/mods/SMAPI_BUILD_IN" ]; then
   fi
 fi
 
-bash -c "${STARDEW_PATH}/Stardew\ Valley/StardewValley"
+echo "Opening Stardew Valley"
+# Open the game
+# bash -c "${STARDEW_PATH}/Stardew\ Valley/StardewValley"
+VSYNC=0 strangle 8 "${STARDEW_PATH}/Stardew Valley/StardewValley"
