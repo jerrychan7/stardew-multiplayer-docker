@@ -89,8 +89,9 @@ chmod +x ${STARDEW_PATH}/Stardew\ Valley/StardewValley
 chmod -R 777 ${STARDEW_PATH}/
 chown -R 1000:1000 ${STARDEW_PATH}/
 chmod +x /opt/*.sh
-chmod -R 777 /config/
-chown -R 1000:1000 /config/
+mkdir -p /config/xdg/cache/openbox/sessions
+chmod -R 777 /config
+chown -R 1000:1000 /config
 EOF_RUN
 
 # CMD ["/bin/bash", "-l"]

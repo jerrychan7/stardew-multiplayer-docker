@@ -1,7 +1,9 @@
 
-valley_saves
+/valley_saves*
 /.vscode
 
 *.ignore.*
 
 /docker/mods/SMAPI_BUILD_IN
+docker/mods/AlwaysOnServer/data
+docker/mods/AlwaysOnServer/ConnectionsCount.txt

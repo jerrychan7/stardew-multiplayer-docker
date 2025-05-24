@@ -4,7 +4,7 @@ This project aims to autostart a Stardew Valley Multiplayer Server as easy as po
 
 ## Important
 
- - Updating to most recent version requires a rebuild: `docker-compose build --no-cache` 
+ - Updating to most recent version requires a rebuild: `docker compose build --no-cache` 
  - Although I'm trying to put out updates, I don't have the time for testing, so I recommend forking and fixing things on your own.
    - You will always get the most recent version with the fork at https://github.com/norimicry/stardew-multiplayer-docker
  - Ansible and Terraform will not be supported anymore
@@ -17,6 +17,8 @@ This project aims to autostart a Stardew Valley Multiplayer Server as easy as po
 git clone https://github.com/printfuck/stardew-multiplayer-docker
 
 docker compose up
+# if you want run containers in the background
+# docker compose up -d
 ```
 
 ## Game Setup
